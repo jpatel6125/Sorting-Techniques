@@ -1,0 +1,39 @@
+public class insertion_sort {
+
+    public static void insertion_sort(int arr[], int n)
+    {
+        //to run the sorting loop till the end
+        for(int i=0; i<n; i++)
+        {
+            int j = i;
+            //we have to compare with the left elements, therefore j--
+            //if j>=0, then previous index (j-1) would be -1, therefore j>0
+            while(j>0 && arr[j-1] > arr[j])
+            {
+                int temp = arr[j];
+                arr[j] = arr[j-1];
+                arr[j-1] = temp;
+                j--;
+            }
+        }
+        //for printing the sorted array
+        for(int i=0; i<n; i++)
+        {
+            System.out.print(arr[i] + " ");
+        }
+    }
+    public static void main(String[] args) {
+        int arr[] = {13, 46, 24, 52, 20, 9};
+        int n = arr.length;
+        //before sorting
+        System.out.println("Before sorting: ");
+        for(int i=0; i<n; i++)
+        {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+        //function call
+        System.out.println("After sorting: ");
+        insertion_sort(arr, n);
+    }
+}
