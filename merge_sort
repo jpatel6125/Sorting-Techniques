@@ -1,0 +1,80 @@
+public class merge_sort {
+
+    public void merge_array(int arr[], int low, int mid, int high){
+        //find sizes of two arrays
+        int n1 = mid - low + 1;
+        int n2 = high - mid;
+
+        // Create temp arrays
+        int left[] = new int[n1];
+        int right[] = new int[n2];
+
+        // Copy data to temp arrays
+        for (int i = 0; i < n1; ++i)
+        {
+            left[i] = arr[low + i];
+        }
+        for (int j = 0; j < n2; ++j)
+        {
+            right[j] = arr[mid + 1 + j];
+        }
+
+        // Merge the temp arrays
+        // Initial indexes of first and second sub arrays
+        int i = 0, j = 0;
+        // Initial index of merged sub array
+        int k = low;
+        while (i < n1 && j < n2) {
+            if (left[i] <= right[j]) {
+                arr[k] = left[i];
+                i++;
+            }
+            else {
+                arr[k] = right[j];
+                j++;
+            }
+            k++;
+        }
+        // Copy remaining elements of left[] if any
+        while (i < n1) {
+            arr[k] = left[i];
+            i++;
+            k++;
+        }
+        // Copy remaining elements of right[] if any
+        while (j < n2) {
+            arr[k] = right[j];
+            j++;
+            k++;
+        }
+    }
+    public void merge_sort(int arr[], int low, int high)
+    {
+        //for single element
+        if(low >= high)
+        {
+            return;
+        }
+        //find mid
+        int mid = (low+high)/2;
+        //sort first(left) and second(right) halves
+        merge_sort(arr, low, mid);
+        merge_sort(arr, mid+1,high);
+        //merge the sorted arrays
+        merge_array(arr,low, mid, high);
+    }
+
+    public void main(String[] args) {
+        int arr[] = {12, 11, 7, 4, 14,13};
+        int n = arr.length;
+        //before sorting
+        System.out.println("Before applying merge sort: ");
+        for(int i=0; i<n; i++)
+        {
+            System.out.print(arr[i] + " ");
+        }
+        //function call
+        System.out.println("After sorting: ");
+        merge_sort(arr, 0, n-1);
+    }
+}
